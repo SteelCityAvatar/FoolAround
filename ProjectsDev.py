@@ -108,17 +108,19 @@ wsbhp_df = pd.DataFrame(wsb_hot_post[0])
 r2 = scraper.most_discussed_companies_from_sticky(subreddit='wallstreetbets')
 r2_df = pd.DataFrame(r2[0])
 
-
  
 
 
 
 def aggr_results(self, df):
+    rdf = df
+    rdf[rdf[rdf.columns[3]].apply(lambda x: len(x) > 0)]
 
 
-rdf = pd.DataFrame(r[0])
-print(rdf)
-rdf[rdf[rdf.columns[3]].apply(lambda x: len(x) > 0)]
+
+
+#rdf = pd.DataFrame(r[0])
+#print(rdf)
 
 
 
