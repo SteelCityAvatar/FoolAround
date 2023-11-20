@@ -8,8 +8,6 @@ client_id = 'XAk2clILlbCHWFZgIU204g'
 client_secret = 'YA8hiEwW_1M0PhatDQMhpzbF1-km0w'
 user_agent = "platform:TopTalked:v1.0 (by /u/masterang3)"
 
-#Authorization: Bearer $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
-
 
 
 class RedditFinancialScraper:
@@ -89,6 +87,13 @@ class RedditFinancialScraper:
                     results.append(comment_data)
 
         return results, sorted(counter.items(), key=lambda item: item[1], reverse=True)
+    def aggr_results(self, df):
+        if df == None: 
+            rdf == pd.DataFrame()
+        else:
+            rdf = df
+        rdf[rdf[rdf.columns[3]].apply(lambda x: len(x) > 0)]
+
 
 
 
@@ -108,13 +113,12 @@ wsbhp_df = pd.DataFrame(wsb_hot_post[0])
 r2 = scraper.most_discussed_companies_from_sticky(subreddit='wallstreetbets')
 r2_df = pd.DataFrame(r2[0])
 
+#Authorization: Bearer $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
+
  
 
 
 
-def aggr_results(self, df):
-    rdf = df
-    rdf[rdf[rdf.columns[3]].apply(lambda x: len(x) > 0)]
 
 
 
