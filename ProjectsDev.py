@@ -19,11 +19,11 @@ class RedditFinancialScraper:
         """
         return getattr(self.reddit.subreddit(subreddit), category)(limit=limit)
 
-    def find_ticker_symbols(self, text):
+    def find_symbols(self, text, type):
         # A simple regex that looks for 2 to 4 uppercase characters in a row, denoting a stock ticker
-        if category == 'stocks':
+        if type == 'stocks':
             pattern = self.stock_regex
-        elif category == 'nfl':
+        elif type == 'nfl':
             pattern = self.nfl_regex
         else:
             raise ValueError(f"Unknown category: {category}")      
@@ -31,11 +31,11 @@ class RedditFinancialScraper:
         return set(re.findall(pattern, text, re.IGNORECASE))
 
 
-    def most_discussed_companies(self, subreddit, category='hot', limit=10):
+    def most_discussed_org(self, subreddit, category='hot',type = 'stocks', limit=10):
         results = []
         counter = {}
         for i, submission in enumerate(self.get_posts(subreddit, category, limit)):
-            post_tickers = self.find_ticker_symbols(submission.title) | self.find_ticker_symbols(submission.selftext)
+            post_tickers = self.find_symbols(submission.title,type = type) | self.find_symbols(submission.selftext, type = type)
             
             # Update the counter for each ticker found in the post title and body
             for ticker in post_tickers:
@@ -53,7 +53,7 @@ class RedditFinancialScraper:
             # Process the comments
             submission.comments.replace_more(limit=0)  # Load all comments
             for j, comment in enumerate(submission.comments.list()):
-                comment_tickers = self.find_ticker_symbols(comment.body)
+                comment_tickers = self.find_symbols(comment.body, type = type)
                 
                 # Update the counter for each ticker found in the comments
                 for ticker in comment_tickers:
@@ -71,14 +71,14 @@ class RedditFinancialScraper:
 
         return results, sorted(counter.items(), key=lambda item: item[1], reverse=True)
 
-    def most_discussed_companies_from_sticky(self, subreddit, limit=10):
+    def most_discussed_org_from_sticky(self, subreddit, limit=10, type = 'stocks'):
         results = []
         counter = {}
         for submission in self.get_posts(subreddit, category='hot',limit = limit):
             if submission.stickied:
                 submission.comments.replace_more(limit=0)  # Load all comments
                 for i, comment in enumerate(submission.comments.list()):
-                    tickers = self.find_ticker_symbols(comment.body)
+                    tickers = self.find_symbols(comment.body)
                     for ticker in tickers:
                         counter[ticker] = counter.get(ticker, 0) + 1
                     
@@ -143,18 +143,23 @@ gpt_api_key = "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"
 scraper = RedditFinancialScraper(client_id=client_id, client_secret=client_secret, user_agent=user_agent)
 
 #ValueInvestingSub
-vi_hot_post= scraper.most_discussed_companies(subreddit = 'ValueInvesting', category='hot')
+vi_hot_post= scraper.most_discussed_org(subreddit = 'ValueInvesting', category='hot',type = 'stocks')
 vihp_df = pd.DataFrame(vi_hot_post[0])
 vihp_df.to_csv(r'C:\Users\anura\OneDrive\Documents\Python Scripts\ValueInvestingTestDf.csv')
 
-r1 = scraper.most_discussed_companies_from_sticky(subreddit='ValueInvesting')
+r1 = scraper.most_discussed_org_from_sticky(subreddit='ValueInvesting')
 r1_df = pd.DataFrame(r1[0])
 
 #WallStreetBetsSub
-wsb_hot_post = scraper.most_discussed_companies_from_hot_posts(subreddit='wallstreetbets',limit=100)
+wsb_hot_post = scraper.most_discussed_org(subreddit='wallstreetbets',limit=100)
 wsbhp_df = pd.DataFrame(wsb_hot_post[0])
-r2 = scraper.most_discussed_companies_from_sticky(subreddit='wallstreetbets')
+r2 = scraper.most_discussed_org_from_sticky(subreddit='wallstreetbets')
 r2_df = pd.DataFrame(r2[0])
+
+#SportsBetting
+sb_hot_post = scraper.most_discussed_org(subreddit = 'sportsbook', type = 'nfl')
+pd.DataFrame(sb_hot_post[0])
+
 
 
 
