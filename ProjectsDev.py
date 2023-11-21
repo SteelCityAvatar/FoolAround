@@ -1,19 +1,16 @@
 import praw
 import re
 import pandas as pd
+import openai
 import os
+
 os.getcwd()
-# Usage
-client_id = 'XAk2clILlbCHWFZgIU204g'
-client_secret = 'YA8hiEwW_1M0PhatDQMhpzbF1-km0w'
-user_agent = "platform:TopTalked:v1.0 (by /u/masterang3)"
-
-
 
 class RedditFinancialScraper:
     def __init__(self, client_id, client_secret, user_agent):
         self.reddit = praw.Reddit(client_id=client_id, client_secret=client_secret, user_agent=user_agent)
-
+        self.stock_regex = r'\b[A-Z]{2,4}\b'
+        self.nfl_regex = r'\b(49ers|Bears|Bengals|Bills|Broncos|Browns|Buccaneers|Cardinals|Chargers|Chiefs|Colts|Cowboys|Dolphins|Eagles|Falcons|Giants|Jaguars|Jets|Lions|Packers|Panthers|Patriots|Raiders|Rams|Ravens|Redskins|Saints|Seahawks|Steelers|Texans|Titans|Vikings)\b'
 
     def get_posts(self, subreddit, category= 'hot', limit= 10):
         """
@@ -24,7 +21,14 @@ class RedditFinancialScraper:
 
     def find_ticker_symbols(self, text):
         # A simple regex that looks for 2 to 4 uppercase characters in a row, denoting a stock ticker
-        return set(re.findall(r'\b[A-Z]{2,4}\b', text))
+        if category == 'stocks':
+            pattern = self.stock_regex
+        elif category == 'nfl':
+            pattern = self.nfl_regex
+        else:
+            raise ValueError(f"Unknown category: {category}")      
+       
+        return set(re.findall(pattern, text, re.IGNORECASE))
 
 
     def most_discussed_companies(self, subreddit, category='hot', limit=10):
@@ -93,6 +97,45 @@ class RedditFinancialScraper:
         else:
             rdf = df
         rdf[rdf[rdf.columns[3]].apply(lambda x: len(x) > 0)]
+        
+class Feed_GPT:
+    # Assume 'scraper_results' is the output from your RedditFinancialScraper
+    # For example, a list of dictionaries containing post/comment data
+
+    # Prepare the data for GPT-4
+    def prepare_data_for_gpt4(scraper_results):
+        formatted_text = ""
+        for item in scraper_results:
+            formatted_text += f"Title: {item['post_title']}\n"
+            formatted_text += f"Body: {item['post_body']}\n"
+            formatted_text += "Tickers: " + ", ".join(item['relevant_tickers']) + "\n\n"
+        return formatted_text
+
+    # Send the data to GPT-4 for analysis
+    def analyze_with_gpt4(data):
+        openai.api_key = 'your-api-key'
+
+        response = openai.Completion.create(
+            model="text-davinci-004",
+            prompt=data,
+            max_tokens=150
+        )
+        
+        return response.choices[0].text.strip()
+
+    # Main workflow
+    formatted_data = prepare_data_for_gpt4(scraper_results)
+    gpt4_response = analyze_with_gpt4(formatted_data)
+
+    print(gpt4_response)
+
+
+
+client_id = 'XAk2clILlbCHWFZgIU204g'
+client_secret = 'YA8hiEwW_1M0PhatDQMhpzbF1-km0w'
+user_agent = "platform:TopTalked:v1.0 (by /u/masterang3)"
+
+gpt_api_key = "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"
 
 
 
@@ -113,7 +156,7 @@ wsbhp_df = pd.DataFrame(wsb_hot_post[0])
 r2 = scraper.most_discussed_companies_from_sticky(subreddit='wallstreetbets')
 r2_df = pd.DataFrame(r2[0])
 
-#Authorization: Bearer $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
+
 
  
 
@@ -128,3 +171,22 @@ r2_df = pd.DataFrame(r2[0])
 
 
 
+import re
+
+class DataScraper:
+
+    def find_symbols_or_teams(self, text, category):
+        if category == 'stocks':
+            pattern = self.stock_regex
+        elif category == 'nfl':
+            pattern = self.nfl_regex
+        else:
+            raise ValueError(f"Unknown category: {category}")
+
+        return set(re.findall(pattern, text, re.IGNORECASE))
+
+# Usage example
+scraper = DataScraper()
+text_to_search = "Sample text containing Giants, NYSE, and Patriots."
+matches = scraper.find_symbols_or_teams(text_to_search, "nfl")
+print(matches)
