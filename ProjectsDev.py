@@ -3,7 +3,6 @@ import re
 import pandas as pd
 import openai
 import os
-i
 
 os.getcwd()
 
@@ -27,32 +26,18 @@ class RedditFinancialScraper:
         """
         return getattr(self.reddit.subreddit(subreddit), category)(limit=limit)
     
-
     def find_symbols(self, text, type):
-    if type == 'stocks':
-        pattern = self.stock_regex
-        found_tickers = set(re.findall(pattern, text, re.IGNORECASE))
-        # Filter tickers against the ticker list
-        valid_tickers = {ticker for ticker in found_tickers if ticker.upper() in self.ticker_list}
-        return valid_tickers
-    elif type == 'nfl':
-        pattern = self.nfl_regex
-        return set(re.findall(pattern, text, re.IGNORECASE))
-    else:
-        raise ValueError(f"Unknown category: {type}")
-    
-
-    def find_symbols(self, text, type):
-        # A simple regex that looks for 2 to 4 uppercase characters in a row, denoting a stock ticker
         if type == 'stocks':
             pattern = self.stock_regex
+            found_tickers = set(re.findall(pattern, text, re.IGNORECASE))
+            # Filter tickers against the ticker list
+            valid_tickers = {ticker for ticker in found_tickers if ticker.upper() in self.ticker_list}
+            return valid_tickers
         elif type == 'nfl':
             pattern = self.nfl_regex
+            return set(re.findall(pattern, text, re.IGNORECASE))
         else:
-            raise ValueError(f"Unknown category: {category}")      
-       
-        return set(re.findall(pattern, text, re.IGNORECASE))
-
+            raise ValueError(f"Unknown category: {type}")
 
     def most_discussed_org(self, subreddit, category='hot',type = 'stocks', limit=10):
         results = []
