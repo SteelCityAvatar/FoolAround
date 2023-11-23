@@ -3,14 +3,22 @@ import re
 import pandas as pd
 import openai
 import os
+i
 
 os.getcwd()
 
+
 class RedditFinancialScraper:
-    def __init__(self, client_id, client_secret, user_agent):
+    def __init__(self, client_id, client_secret, user_agent, ticker_file='company_tickers.json'):
         self.reddit = praw.Reddit(client_id=client_id, client_secret=client_secret, user_agent=user_agent)
         self.stock_regex = r'\b[A-Z]{2,4}\b'
         self.nfl_regex = r'\b(49ers|Bears|Bengals|Bills|Broncos|Browns|Buccaneers|Cardinals|Chargers|Chiefs|Colts|Cowboys|Dolphins|Eagles|Falcons|Giants|Jaguars|Jets|Lions|Packers|Panthers|Patriots|Raiders|Rams|Ravens|Redskins|Saints|Seahawks|Steelers|Texans|Titans|Vikings)\b'
+        self.ticker_list = self.load_ticker_list(ticker_file)
+
+    def load_ticker_list(self, ticker_file):
+        with open(ticker_file, 'r') as file:
+            ticker_data = json.load(file)
+        return set([ticker['ticker'] for ticker in ticker_data.values()])  # Assuming 'ticker' is the key for ticker symbols
 
     def get_posts(self, subreddit, category= 'hot', limit= 10):
         """
@@ -18,6 +26,21 @@ class RedditFinancialScraper:
         'category' can be 'hot', 'new', 'top', etc.
         """
         return getattr(self.reddit.subreddit(subreddit), category)(limit=limit)
+    
+
+    def find_symbols(self, text, type):
+    if type == 'stocks':
+        pattern = self.stock_regex
+        found_tickers = set(re.findall(pattern, text, re.IGNORECASE))
+        # Filter tickers against the ticker list
+        valid_tickers = {ticker for ticker in found_tickers if ticker.upper() in self.ticker_list}
+        return valid_tickers
+    elif type == 'nfl':
+        pattern = self.nfl_regex
+        return set(re.findall(pattern, text, re.IGNORECASE))
+    else:
+        raise ValueError(f"Unknown category: {type}")
+    
 
     def find_symbols(self, text, type):
         # A simple regex that looks for 2 to 4 uppercase characters in a row, denoting a stock ticker
@@ -71,14 +94,14 @@ class RedditFinancialScraper:
 
         return results, sorted(counter.items(), key=lambda item: item[1], reverse=True)
 
-    def most_discussed_org_from_sticky(self, subreddit, limit=10, type = 'stocks'):
+    def most_discussed_org_from_sticky(self, subreddit, type = 'stocks',limit=10):
         results = []
         counter = {}
         for submission in self.get_posts(subreddit, category='hot',limit = limit):
             if submission.stickied:
                 submission.comments.replace_more(limit=0)  # Load all comments
                 for i, comment in enumerate(submission.comments.list()):
-                    tickers = self.find_symbols(comment.body)
+                    tickers = self.find_symbols(comment.body,type= type)
                     for ticker in tickers:
                         counter[ticker] = counter.get(ticker, 0) + 1
                     
@@ -131,12 +154,6 @@ class Feed_GPT:
 
 
 
-client_id = 'XAk2clILlbCHWFZgIU204g'
-client_secret = 'YA8hiEwW_1M0PhatDQMhpzbF1-km0w'
-user_agent = "platform:TopTalked:v1.0 (by /u/masterang3)"
-
-gpt_api_key = "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"
-
 
 
 
@@ -145,15 +162,19 @@ scraper = RedditFinancialScraper(client_id=client_id, client_secret=client_secre
 #ValueInvestingSub
 vi_hot_post= scraper.most_discussed_org(subreddit = 'ValueInvesting', category='hot',type = 'stocks')
 vihp_df = pd.DataFrame(vi_hot_post[0])
-vihp_df.to_csv(r'C:\Users\anura\OneDrive\Documents\Python Scripts\ValueInvestingTestDf.csv')
+print(vihp_df)
+#vihp_df.to_csv(r'C:\Users\anura\OneDrive\Documents\Python Scripts\ValueInvestingTestDf.csv')
 
-r1 = scraper.most_discussed_org_from_sticky(subreddit='ValueInvesting')
+r1 = scraper.most_discussed_org_from_sticky(subreddit='ValueInvesting', type = 'stocks')
 r1_df = pd.DataFrame(r1[0])
+print()
 
 #WallStreetBetsSub
-wsb_hot_post = scraper.most_discussed_org(subreddit='wallstreetbets',limit=100)
+wsb_hot_post = scraper.most_discussed_org(subreddit='wallstreetbets',category = 'hot',type = 'stocks',limit=100)
 wsbhp_df = pd.DataFrame(wsb_hot_post[0])
-r2 = scraper.most_discussed_org_from_sticky(subreddit='wallstreetbets')
+wsbhp_df.to_csv(r'C:\Users\anura\OneDrive\Documents\Python Scripts\WSBTestDf.csv')
+
+r2 = scraper.most_discussed_org_from_sticky(subreddit='wallstreetbets',type = 'stocks')
 r2_df = pd.DataFrame(r2[0])
 
 #SportsBetting
@@ -162,36 +183,30 @@ pd.DataFrame(sb_hot_post[0])
 
 
 
+client_id = 'XAk2clILlbCHWFZgIU204g'
+client_secret = 'YA8hiEwW_1M0PhatDQMhpzbF1-km0w'
+user_agent = "platform:TopTalked:v1.0 (by /u/masterang3)"
+
+gpt_api_key = "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"
+alpha_vantage_api_key = "XZHHOU228LC1U5AZ"
+
 
  
 
 
 
 
+import json
 
+# Path to your downloaded JSON file
+file_path = r'C:\Users\anura\OneDrive\Documents\Python Scripts\FoolAround\SupportingFiles\company_tickers.json'
 
+# Read the JSON data from the file
+with open(file_path, 'r') as file:
+    data = json.load(file)
 
-#rdf = pd.DataFrame(r[0])
-#print(rdf)
-
-
-
-import re
-
-class DataScraper:
-
-    def find_symbols_or_teams(self, text, category):
-        if category == 'stocks':
-            pattern = self.stock_regex
-        elif category == 'nfl':
-            pattern = self.nfl_regex
-        else:
-            raise ValueError(f"Unknown category: {category}")
-
-        return set(re.findall(pattern, text, re.IGNORECASE))
-
-# Usage example
-scraper = DataScraper()
-text_to_search = "Sample text containing Giants, NYSE, and Patriots."
-matches = scraper.find_symbols_or_teams(text_to_search, "nfl")
-print(matches)
+# Now, you can work with the 'data' dictionary
+# Example: Print first 10 tickers
+for i, (key, value) in enumerate(data.items()):
+    if i < 10:
+        print(key, value)
