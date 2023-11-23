@@ -5,6 +5,8 @@ import openai
 import os
 
 os.getcwd()
+import json
+file_path = r'C:\Users\anura\OneDrive\Documents\Python Scripts\FoolAround\SupportingFiles\company_tickers.json'
 
 
 class RedditFinancialScraper:
@@ -106,37 +108,43 @@ class RedditFinancialScraper:
             rdf = df
         rdf[rdf[rdf.columns[3]].apply(lambda x: len(x) > 0)]
         
-class Feed_GPT:
-    # Assume 'scraper_results' is the output from your RedditFinancialScraper
-    # For example, a list of dictionaries containing post/comment data
+# class Feed_GPT:
+#     # Assume 'scraper_results' is the output from your RedditFinancialScraper
+#     # For example, a list of dictionaries containing post/comment data
 
-    # Prepare the data for GPT-4
-    def prepare_data_for_gpt4(scraper_results):
-        formatted_text = ""
-        for item in scraper_results:
-            formatted_text += f"Title: {item['post_title']}\n"
-            formatted_text += f"Body: {item['post_body']}\n"
-            formatted_text += "Tickers: " + ", ".join(item['relevant_tickers']) + "\n\n"
-        return formatted_text
+#     # Prepare the data for GPT-4
+#     def prepare_data_for_gpt4(scraper_results):
+#         formatted_text = ""
+#         for item in scraper_results:
+#             formatted_text += f"Title: {item['post_title']}\n"
+#             formatted_text += f"Body: {item['post_body']}\n"
+#             formatted_text += "Tickers: " + ", ".join(item['relevant_tickers']) + "\n\n"
+#         return formatted_text
 
-    # Send the data to GPT-4 for analysis
-    def analyze_with_gpt4(data):
-        openai.api_key = 'your-api-key'
+#     # Send the data to GPT-4 for analysis
+#     def analyze_with_gpt4(data):
+#         openai.api_key = 'your-api-key'
 
-        response = openai.Completion.create(
-            model="text-davinci-004",
-            prompt=data,
-            max_tokens=150
-        )
+#         response = openai.Completion.create(
+#             model="text-davinci-004",
+#             prompt=data,
+#             max_tokens=150
+#         )
         
-        return response.choices[0].text.strip()
+#         return response.choices[0].text.strip()
 
-    # Main workflow
-    formatted_data = prepare_data_for_gpt4(scraper_results)
-    gpt4_response = analyze_with_gpt4(formatted_data)
+#     # Main workflow
+#     formatted_data = prepare_data_for_gpt4(scraper_results)
+#     gpt4_response = analyze_with_gpt4(formatted_data)
 
-    print(gpt4_response)
+#     print(gpt4_response)
 
+client_id = 'XAk2clILlbCHWFZgIU204g'
+client_secret = 'YA8hiEwW_1M0PhatDQMhpzbF1-km0w'
+user_agent = "platform:TopTalked:v1.0 (by /u/masterang3)"
+
+gpt_api_key = "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"
+alpha_vantage_api_key = "XZHHOU228LC1U5AZ"
 
 
 
@@ -168,30 +176,3 @@ pd.DataFrame(sb_hot_post[0])
 
 
 
-client_id = 'XAk2clILlbCHWFZgIU204g'
-client_secret = 'YA8hiEwW_1M0PhatDQMhpzbF1-km0w'
-user_agent = "platform:TopTalked:v1.0 (by /u/masterang3)"
-
-gpt_api_key = "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"
-alpha_vantage_api_key = "XZHHOU228LC1U5AZ"
-
-
- 
-
-
-
-
-import json
-
-# Path to your downloaded JSON file
-file_path = r'C:\Users\anura\OneDrive\Documents\Python Scripts\FoolAround\SupportingFiles\company_tickers.json'
-
-# Read the JSON data from the file
-with open(file_path, 'r') as file:
-    data = json.load(file)
-
-# Now, you can work with the 'data' dictionary
-# Example: Print first 10 tickers
-for i, (key, value) in enumerate(data.items()):
-    if i < 10:
-        print(key, value)
