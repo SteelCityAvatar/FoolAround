@@ -6,11 +6,10 @@ import os
 
 os.getcwd()
 import json
+
 file_path = r'C:\Users\anura\OneDrive\Documents\Python Scripts\FoolAround\SupportingFiles\company_tickers.json'
-
-
 class RedditFinancialScraper:
-    def __init__(self, client_id, client_secret, user_agent, ticker_file='company_tickers.json'):
+    def __init__(self, client_id, client_secret, user_agent, ticker_file=file_path):
         self.reddit = praw.Reddit(client_id=client_id, client_secret=client_secret, user_agent=user_agent)
         self.stock_regex = r'\b[A-Z]{2,4}\b'
         self.nfl_regex = r'\b(49ers|Bears|Bengals|Bills|Broncos|Browns|Buccaneers|Cardinals|Chargers|Chiefs|Colts|Cowboys|Dolphins|Eagles|Falcons|Giants|Jaguars|Jets|Lions|Packers|Panthers|Patriots|Raiders|Rams|Ravens|Redskins|Saints|Seahawks|Steelers|Texans|Titans|Vikings)\b'
@@ -22,7 +21,7 @@ class RedditFinancialScraper:
         return set([ticker['ticker'] for ticker in ticker_data.values()])  # Assuming 'ticker' is the key for ticker symbols
 
     def get_posts(self, subreddit, category= 'hot', limit= 10):
-        """
+        """                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   
         Generalized method to get posts from a subreddit.
         'category' can be 'hot', 'new', 'top', etc.
         """
@@ -101,78 +100,69 @@ class RedditFinancialScraper:
                     results.append(comment_data)
 
         return results, sorted(counter.items(), key=lambda item: item[1], reverse=True)
+
     def aggr_results(self, df):
         if df == None: 
             rdf == pd.DataFrame()
         else:
             rdf = df
-        rdf[rdf[rdf.columns[3]].apply(lambda x: len(x) > 0)]
+        return rdf[rdf[rdf.columns[3]].apply(lambda x: len(x) > 0)]
+
+class GptSentimentAnalysis:
+    def __init__(self, post_df):
+        self.post_df = post_df
+        openai.api_key = "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"  # Replace with your actual API key
+
+    def sentiment_gpt(self, post_title, post_body, tickers):
+        prompt = (f"Analyze the sentiment of the following Reddit post and its relevance "
+                  f"to the stock market. Identify the sentiment towards the mentioned stocks, and ignore items in the ticker list that are just regular words used in the post.  Do however try to correctly ID the true tickers in tickerlist that discussed in each post: "
+                  f"{', '.join(tickers)} if any.\n\nTitle: {post_title}\nBody: {post_body}")
         
-# class Feed_GPT:
-#     # Assume 'scraper_results' is the output from your RedditFinancialScraper
-#     # For example, a list of dictionaries containing post/comment data
+        response = openai.Completion.create(model="text-davinci-004",
+                                            prompt=prompt,
+                                            max_tokens=1024)
+        return response.choices[0].text.strip()
 
-#     # Prepare the data for GPT-4
-#     def prepare_data_for_gpt4(scraper_results):
-#         formatted_text = ""
-#         for item in scraper_results:
-#             formatted_text += f"Title: {item['post_title']}\n"
-#             formatted_text += f"Body: {item['post_body']}\n"
-#             formatted_text += "Tickers: " + ", ".join(item['relevant_tickers']) + "\n\n"
-#         return formatted_text
-
-#     # Send the data to GPT-4 for analysis
-#     def analyze_with_gpt4(data):
-#         openai.api_key = 'your-api-key'
-
-#         response = openai.Completion.create(
-#             model="text-davinci-004",
-#             prompt=data,
-#             max_tokens=150
-#         )
-        
-#         return response.choices[0].text.strip()
-
-#     # Main workflow
-#     formatted_data = prepare_data_for_gpt4(scraper_results)
-#     gpt4_response = analyze_with_gpt4(formatted_data)
-
-#     print(gpt4_response)
+# Example usage:
+# Assuming 'df' is your dataframe with Reddit posts
 
 client_id = 'XAk2clILlbCHWFZgIU204g'
 client_secret = 'YA8hiEwW_1M0PhatDQMhpzbF1-km0w'
 user_agent = "platform:TopTalked:v1.0 (by /u/masterang3)"
-
-gpt_api_key = "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"
 alpha_vantage_api_key = "XZHHOU228LC1U5AZ"
 
-
-
-
+# ticker_df = pd.read_json(file_path).T
+# ticker_df[ticker_df[ticker_df.columns[1]]=='IT']
 
 scraper = RedditFinancialScraper(client_id=client_id, client_secret=client_secret, user_agent=user_agent)
 
 #ValueInvestingSub
 vi_hot_post= scraper.most_discussed_org(subreddit = 'ValueInvesting', category='hot',type = 'stocks')
 vihp_df = pd.DataFrame(vi_hot_post[0])
-print(vihp_df)
+#print(vihp_df)
 #vihp_df.to_csv(r'C:\Users\anura\OneDrive\Documents\Python Scripts\ValueInvestingTestDf.csv')
 
-r1 = scraper.most_discussed_org_from_sticky(subreddit='ValueInvesting', type = 'stocks')
-r1_df = pd.DataFrame(r1[0])
-print()
+# Initialize the sentiment analysis class with the dataframe
+sentiment_analyzer = GptSentimentAnalysis(vihp_df)
+vihp_df
+# Iterate through the dataframe and analyze sentiment
+for index, row in vihp_df.iterrows():
+    sentiment_analysis = sentiment_analyzer.sentiment_gpt(row['post_title'], row['post_body'], row['relevant_tickers'])
+    df.at[index, 'sentiment_analysis'] = sentiment_analysis
+    
+# r1 = scraper.most_discussed_org_from_sticky(subreddit='ValueInvesting', type = 'stocks')
+# r1_df = pd.DataFrame(r1[0])
+# print()
 
-#WallStreetBetsSub
-wsb_hot_post = scraper.most_discussed_org(subreddit='wallstreetbets',category = 'hot',type = 'stocks',limit=100)
-wsbhp_df = pd.DataFrame(wsb_hot_post[0])
-wsbhp_df.to_csv(r'C:\Users\anura\OneDrive\Documents\Python Scripts\WSBTestDf.csv')
-
-r2 = scraper.most_discussed_org_from_sticky(subreddit='wallstreetbets',type = 'stocks')
-r2_df = pd.DataFrame(r2[0])
-
-#SportsBetting
-sb_hot_post = scraper.most_discussed_org(subreddit = 'sportsbook', type = 'nfl')
-pd.DataFrame(sb_hot_post[0])
+# #WallStreetBetsSub
+# wsb_hot_post = scraper.most_discussed_org(subreddit='wallstreetbets',category = 'hot',type = 'stocks',limit=100)
+# wsbhp_df = pd.DataFrame(wsb_hot_post[0])
+# wsbhp_df.to_csv(r'C:\Users\anura\OneDrive\Documents\Python Scripts\WSBTestDf.csv')
 
 
+# r2 = scraper.most_discussed_org_from_sticky(subreddit='wallstreetbets',type = 'stocks')
+# r2_df = pd.DataFrame(r2[0])
 
+# #SportsBetting
+# sb_hot_post = scraper.most_discussed_org(subreddit = 'sportsbook', type = 'nfl')
+# pd.DataFrame(sb_hot_post[0])
