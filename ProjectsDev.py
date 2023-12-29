@@ -145,10 +145,12 @@ vihp_df = pd.DataFrame(vi_hot_post[0])
 # Initialize the sentiment analysis class with the dataframe
 sentiment_analyzer = GptSentimentAnalysis(vihp_df)
 vihp_df
+
+
 # Iterate through the dataframe and analyze sentiment
 for index, row in vihp_df.iterrows():
     sentiment_analysis = sentiment_analyzer.sentiment_gpt(row['post_title'], row['post_body'], row['relevant_tickers'])
-    df.at[index, 'sentiment_analysis'] = sentiment_analysis
+    vihp_df.at[index, 'sentiment_analysis'] = sentiment_analysis
     
 # r1 = scraper.most_discussed_org_from_sticky(subreddit='ValueInvesting', type = 'stocks')
 # r1_df = pd.DataFrame(r1[0])
@@ -158,7 +160,6 @@ for index, row in vihp_df.iterrows():
 # wsb_hot_post = scraper.most_discussed_org(subreddit='wallstreetbets',category = 'hot',type = 'stocks',limit=100)
 # wsbhp_df = pd.DataFrame(wsb_hot_post[0])
 # wsbhp_df.to_csv(r'C:\Users\anura\OneDrive\Documents\Python Scripts\WSBTestDf.csv')
-
 
 # r2 = scraper.most_discussed_org_from_sticky(subreddit='wallstreetbets',type = 'stocks')
 # r2_df = pd.DataFrame(r2[0])
