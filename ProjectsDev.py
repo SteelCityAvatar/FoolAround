@@ -3,13 +3,10 @@ import re
 import pandas as pd
 import openai
 import os
-
-os.getcwd()
 import json
 
-file_path = r'C:\Users\anura\OneDrive\Documents\Python Scripts\FoolAround\SupportingFiles\company_tickers.json'
 class RedditFinancialScraper:
-    def __init__(self, client_id, client_secret, user_agent, ticker_file=file_path):
+    def __init__(self, client_id, client_secret, user_agent, ticker_file):
         self.reddit = praw.Reddit(client_id=client_id, client_secret=client_secret, user_agent=user_agent)
         self.stock_regex = r'\b[A-Z]{2,4}\b'
         self.nfl_regex = r'\b(49ers|Bears|Bengals|Bills|Broncos|Browns|Buccaneers|Cardinals|Chargers|Chiefs|Colts|Cowboys|Dolphins|Eagles|Falcons|Giants|Jaguars|Jets|Lions|Packers|Panthers|Patriots|Raiders|Rams|Ravens|Redskins|Saints|Seahawks|Steelers|Texans|Titans|Vikings)\b'
@@ -108,50 +105,52 @@ class RedditFinancialScraper:
             rdf = df
         return rdf[rdf[rdf.columns[3]].apply(lambda x: len(x) > 0)]
 
-class GptSentimentAnalysis:
-    def __init__(self, post_df):
-        self.post_df = post_df
-        openai.api_key = "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"  # Replace with your actual API key
 
-    def sentiment_gpt(self, post_title, post_body, tickers):
-        prompt = (f"Analyze the sentiment of the following Reddit post and its relevance "
-                  f"to the stock market. Identify the sentiment towards the mentioned stocks, and ignore items in the ticker list that are just regular words used in the post.  Do however try to correctly ID the true tickers in tickerlist that discussed in each post: "
-                  f"{', '.join(tickers)} if any.\n\nTitle: {post_title}\nBody: {post_body}")
-        
-        response = openai.Completion.create(model="text-davinci-004",
-                                            prompt=prompt,
-                                            max_tokens=1024)
-        return response.choices[0].text.strip()
-
-# Example usage:
-# Assuming 'df' is your dataframe with Reddit posts
-
-client_id = 'XAk2clILlbCHWFZgIU204g'
-client_secret = 'YA8hiEwW_1M0PhatDQMhpzbF1-km0w'
-user_agent = "platform:TopTalked:v1.0 (by /u/masterang3)"
-alpha_vantage_api_key = "XZHHOU228LC1U5AZ"
-
-# ticker_df = pd.read_json(file_path).T
-# ticker_df[ticker_df[ticker_df.columns[1]]=='IT']
-
-scraper = RedditFinancialScraper(client_id=client_id, client_secret=client_secret, user_agent=user_agent)
+os.getcwd()
+file_path = r'C:\Users\anura\Documents\PyProjects\FoolAround\SupportingFiles\company_tickers.json'
+scraper = RedditFinancialScraper(client_id=client_id, client_secret=client_secret, user_agent=user_agent,ticker_file = file_path)
 
 #ValueInvestingSub
 vi_hot_post= scraper.most_discussed_org(subreddit = 'ValueInvesting', category='hot',type = 'stocks')
 vihp_df = pd.DataFrame(vi_hot_post[0])
-#print(vihp_df)
-#vihp_df.to_csv(r'C:\Users\anura\OneDrive\Documents\Python Scripts\ValueInvestingTestDf.csv')
 
-# Initialize the sentiment analysis class with the dataframe
-sentiment_analyzer = GptSentimentAnalysis(vihp_df)
-vihp_df
+vh_slice = vihp_df.iloc[0:5,:]
+sentiment_analyzer = GptSentimentAnalysis(openai_api_key)
+
+
 
 
 # Iterate through the dataframe and analyze sentiment
-for index, row in vihp_df.iterrows():
-    sentiment_analysis = sentiment_analyzer.sentiment_gpt(row['post_title'], row['post_body'], row['relevant_tickers'])
-    vihp_df.at[index, 'sentiment_analysis'] = sentiment_analysis
-    
+for index, row in vh_slice.iterrows():
+    try:
+        print("_________________________")
+        print(row['post_title'])
+        print(row['post_body'])
+        print(row['relevant_tickers'])
+        print(row['comment_number'])
+        print(row['comment'])
+        print("_________________________")
+
+        sentiment_analysis = sentiment_analyzer.sentiment_gpt(row['post_title'], row['post_body'], row['relevant_tickers'])
+        vihp_df.at[index, 'sentiment_analysis'] = sentiment_analysis
+    except TypeError:
+         pass
+
+
+
+
+
+#print(vihp_df)
+vihp_df.to_csv(r'C:\Users\anura\OneDrive\Documents\Python Scripts\ValueInvestingTestDf.csv')
+
+
+ 
+
+
+
+
+
+
 # r1 = scraper.most_discussed_org_from_sticky(subreddit='ValueInvesting', type = 'stocks')
 # r1_df = pd.DataFrame(r1[0])
 # print()
@@ -167,3 +166,4 @@ for index, row in vihp_df.iterrows():
 # #SportsBetting
 # sb_hot_post = scraper.most_discussed_org(subreddit = 'sportsbook', type = 'nfl')
 # pd.DataFrame(sb_hot_post[0])
+    
