@@ -121,20 +121,20 @@ sentiment_analyzer = GptSentimentAnalysis(openai_api_key)
 
 
 # Iterate through the dataframe and analyze sentiment
-for index, row in vh_slice.iterrows():
-    try:
-        print("_________________________")
-        print(row['post_title'])
-        print(row['post_body'])
-        print(row['relevant_tickers'])
-        print(row['comment_number'])
-        print(row['comment'])
-        print("_________________________")
+# for index, row in vh_slice.iterrows():
+#     try:
+#         print("_________________________")
+#         print(row['post_title'])
+#         print(row['post_body'])
+#         print(row['relevant_tickers'])
+#         print(row['comment_number'])
+#         print(row['comment'])
+#         print("_________________________")
 
-        sentiment_analysis = sentiment_analyzer.sentiment_gpt(row['post_title'], row['post_body'], row['relevant_tickers'])
-        vihp_df.at[index, 'sentiment_analysis'] = sentiment_analysis
-    except TypeError:
-         pass
+#         sentiment_analysis = sentiment_analyzer.sentiment_gpt(row['post_title'], row['post_body'], row['relevant_tickers'])
+#         vihp_df.at[index, 'sentiment_analysis'] = sentiment_analysis
+#     except TypeError:
+#          pass
 
 
 
