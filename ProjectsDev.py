@@ -7,7 +7,7 @@ import pandas as pd
 import numpy as np
 import json
 import requests
-from ProjectsDev import RedditFinancialScraper
+from RedditScraper import RedditFinancialScraper
 # from GPTClassinDev import GptSentimentAnalysis
 
 
@@ -26,10 +26,8 @@ vihp_df = pd.DataFrame(vi_hot_post[0])
 print(vihp_df)
 vh_slice = vihp_df.iloc[0:5,:]
 
+vihp_df.to_csv(r'C:\Users\anura\Documents\PyProjects\FoolAround\ValueInvestingTestDf.csv')
 
-
-
-vihp_df.to_csv(r'C:\Users\anura\OneDrive\Documents\Python Scripts\ValueInvestingTestDf.csv')
 
 
  
