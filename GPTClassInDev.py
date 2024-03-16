@@ -12,6 +12,9 @@ class GptAnalysis:
         openai.api_key = self.openai_api_key
 
     def get_system_message(self, message):
+        if message == "":
+            system_message = "You are a highly intelligent financial analyst.  Your job is to provide a sentiment analysis of all tickers that may be discussed in a entered Reddit post.*
+        input("Enter your message: ")
     
         return system_message
     

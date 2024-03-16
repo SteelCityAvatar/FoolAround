@@ -8,6 +8,10 @@ import numpy as np
 import json
 import requests
 from RedditScraper import RedditFinancialScraper
+from pyedgar import EDGARIndex, Filing#, Company
+
+
+
 # from GPTClassinDev import GptSentimentAnalysis
 
 
@@ -23,11 +27,13 @@ scraper = RedditFinancialScraper(client_id=client_id, client_secret=client_secre
 #ValueInvestingSub
 vi_hot_post= scraper.most_discussed_org(subreddit = 'ValueInvesting', category='hot',type = 'stocks')
 vihp_df = pd.DataFrame(vi_hot_post[0])
-print(vihp_df)
-vh_slice = vihp_df.iloc[0:5,:]
+vihp_df['comment_date'] = vihp_df['comment_date'].astype('datetime64[s]')
+# rdf = vihp_df.iloc[0:5,:]
+# rdf[rdf.columns[3]]#.apply(lambda x: len(x) > 0)]
+
 
 vihp_df.to_csv(r'C:\Users\anura\Documents\PyProjects\FoolAround\ValueInvestingTestDf.csv')
 
-
+f=Filing(20,'0001045810-22-000079')
 
  

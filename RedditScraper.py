@@ -4,7 +4,6 @@ import pandas as pd
 import openai
 import os
 import json
-
 os.getcwd()
 class RedditFinancialScraper:
     def __init__(self, client_id, client_secret, user_agent, ticker_file):
@@ -51,6 +50,7 @@ class RedditFinancialScraper:
             # Add post data to the results
             post_data = {
                 "post_title": submission.title,
+                "comment_date": submission.created_utc,
                 "post_number": i,
                 "post_body": submission.selftext,
                 "relevant_tickers": list(post_tickers)
@@ -70,6 +70,7 @@ class RedditFinancialScraper:
                 if comment_tickers:
                     comment_data = {
                         "post_title": submission.title,
+                        "comment_date": comment.created_utc,
                         "comment_number": j,
                         "comment": comment.body,
                         "relevant_tickers": list(comment_tickers)
@@ -91,6 +92,7 @@ class RedditFinancialScraper:
                     
                     comment_data = {
                         "stickied_post": submission.title,
+                        "comment_date": comment.created_utc,
                         "comment_number": i,
                         "comment": comment.body,
                         "relevant_tickers": list(tickers)
