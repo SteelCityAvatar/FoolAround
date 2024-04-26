@@ -5,17 +5,25 @@ import openai
 import os
 import json
 os.getcwd()
+
+
 class RedditFinancialScraper:
     def __init__(self, client_id, client_secret, user_agent, ticker_file):
         self.reddit = praw.Reddit(client_id=client_id, client_secret=client_secret, user_agent=user_agent)
         self.stock_regex = r'\b[A-Z]{2,4}\b'
-        self.nfl_regex = r'\b(49ers|Bears|Bengals|Bills|Broncos|Browns|Buccaneers|Cardinals|Chargers|Chiefs|Colts|Cowboys|Dolphins|Eagles|Falcons|Giants|Jaguars|Jets|Lions|Packers|Panthers|Patriots|Raiders|Rams|Ravens|Redskins|Saints|Seahawks|Steelers|Texans|Titans|Vikings)\b'
+        # self.nfl_regex = r'\b(49ers|Bears|Bengals|Bills|Broncos|Browns|Buccaneers|Cardinals|Chargers|Chiefs|Colts|Cowboys|Dolphins|Eagles|Falcons|Giants|Jaguars|Jets|Lions|Packers|Panthers|Patriots|Raiders|Rams|Ravens|Redskins|Saints|Seahawks|Steelers|Texans|Titans|Vikings)\b'
         self.ticker_list = self.load_ticker_list(ticker_file)
 
     def load_ticker_list(self, ticker_file):
         with open(ticker_file, 'r') as file:
             ticker_data = json.load(file)
         return set([ticker['ticker'] for ticker in ticker_data.values()])  # Assuming 'ticker' is the key for ticker symbols
+    
+    def count_posts(self, subreddit):
+        reddit.subreddit(subreddit)
+        new_posts = subreddit.new(limit=None)
+        posts_in_time = sum(1 for post in new_posts if datetime.fromtimestamp(post.created_utc) > datetime.now())
+        return posts_in_time      
 
     def get_posts(self, subreddit, category= 'hot', limit= 10):
         """                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   
@@ -58,7 +66,7 @@ class RedditFinancialScraper:
             results.append(post_data)
             
             # Process the comments
-            submission.comments.replace_more(limit=0)  # Load all comments
+            submission.comments.replace_more(limit=None)  # Load all comments
             for j, comment in enumerate(submission.comments.list()):
                 comment_tickers = self.find_symbols(comment.body, type = type)
                 
