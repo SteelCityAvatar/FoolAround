@@ -4,13 +4,11 @@ import pandas as pd
 import openai
 import os
 import json
-os.getcwd()
-
 
 class RedditFinancialScraper:
     def __init__(self, client_id, client_secret, user_agent, ticker_file):
         self.reddit = praw.Reddit(client_id=client_id, client_secret=client_secret, user_agent=user_agent)
-        self.stock_regex = r'\b[A-Z]{2,4}\b'
+        self.stock_regex = r'\b[A-Z]{2,5}\b'
         # self.nfl_regex = r'\b(49ers|Bears|Bengals|Bills|Broncos|Browns|Buccaneers|Cardinals|Chargers|Chiefs|Colts|Cowboys|Dolphins|Eagles|Falcons|Giants|Jaguars|Jets|Lions|Packers|Panthers|Patriots|Raiders|Rams|Ravens|Redskins|Saints|Seahawks|Steelers|Texans|Titans|Vikings)\b'
         self.ticker_list = self.load_ticker_list(ticker_file)
 
@@ -35,13 +33,13 @@ class RedditFinancialScraper:
     def find_symbols(self, text, type):
         if type == 'stocks':
             pattern = self.stock_regex
-            found_tickers = set(re.findall(pattern, text, re.IGNORECASE))
+            found_tickers = set(re.findall(pattern, text)
             # Filter tickers against the ticker list
             valid_tickers = {ticker for ticker in found_tickers if ticker.upper() in self.ticker_list}
             return valid_tickers
         elif type == 'nfl':
             pattern = self.nfl_regex
-            return set(re.findall(pattern, text, re.IGNORECASE))
+            return set(re.findall(pattern, text)
         else:
             raise ValueError(f"Unknown category: {type}")
 
@@ -132,8 +130,4 @@ class RedditFinancialScraper:
 #         vihp_df.at[index, 'sentiment_analysis'] = sentiment_analysis
 #     except TypeError:
 #          pass
-
-
-
-
 
