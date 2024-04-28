@@ -18,7 +18,7 @@ class RedditFinancialScraper:
         return set([ticker['ticker'] for ticker in ticker_data.values()])  # Assuming 'ticker' is the key for ticker symbols
     
     def count_posts(self, subreddit):
-        reddit.subreddit(subreddit)
+        self.reddit.subreddit(subreddit)
         new_posts = subreddit.new(limit=None)
         posts_in_time = sum(1 for post in new_posts if datetime.fromtimestamp(post.created_utc) > datetime.now())
         return posts_in_time      
@@ -33,13 +33,13 @@ class RedditFinancialScraper:
     def find_symbols(self, text, type):
         if type == 'stocks':
             pattern = self.stock_regex
-            found_tickers = set(re.findall(pattern, text)
+            found_tickers = set(re.findall(pattern, text))
             # Filter tickers against the ticker list
             valid_tickers = {ticker for ticker in found_tickers if ticker.upper() in self.ticker_list}
             return valid_tickers
         elif type == 'nfl':
             pattern = self.nfl_regex
-            return set(re.findall(pattern, text)
+            return set(re.findall(pattern, text))
         else:
             raise ValueError(f"Unknown category: {type}")
 
