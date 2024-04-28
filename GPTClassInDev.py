@@ -6,6 +6,23 @@ import pandas as pd
 import os
 import json
 
+# # Iterate through the dataframe and analyze sentiment
+# for index, row in vh_slice.iterrows():
+#     try:
+#         print("_________________________")
+#         print(row['post_title'])
+#         print(row['post_body'])
+#         print(row['relevant_tickers'])
+#         print(row['comment_number'])
+#         print(row['comment'])
+#         print("_________________________")
+
+#         sentiment_analysis = sentiment_analyzer.sentiment_gpt(row['post_title'], row['post_body'], row['relevant_tickers'])
+#         vihp_df.at[index, 'sentiment_analysis'] = sentiment_analysis
+#     except TypeError:
+#          pass
+
+
 class GptAnalysis:
     def __init__(self, openai_api_key):
         self.openai_api_key = openai_api_key
