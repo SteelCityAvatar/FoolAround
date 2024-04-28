@@ -4,6 +4,7 @@ import pandas as pd
 import openai
 import os
 import json
+from datetime import datetime
 
 class RedditFinancialScraper:
     def __init__(self, client_id, client_secret, user_agent, ticker_file):

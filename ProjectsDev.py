@@ -21,7 +21,7 @@ if __name__ == '__main__':
     now = datetime.now()
     # Format it as a string
     timestamp = now.strftime('%Y%m%d_%H%M%S')
-    json_file_path = r'C:\Users\anura\Documents\PyProjects\FoolAround\SupportingFiles\company_tickers.json'
+    json_file_path = r'SupportingFiles\company_tickers.json'
     scraper = RedditFinancialScraper(client_id=client_id, client_secret=client_secret, user_agent=user_agent,ticker_file = json_file_path)
     #ValueInvestingSub
     # Get the most discussed posts
