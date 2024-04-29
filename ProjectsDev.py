@@ -32,7 +32,7 @@ if __name__ == '__main__':
     
     #ValueInvestingSub
     # Get the most discussed posts
-    vi_hot_post = scraper.most_discussed_org(subreddit='ValueInvesting', category='hot',limit=100)
+    vi_hot_post = scraper.most_discussed_org(subreddit='ValueInvesting', category='hot',limit=10)
     # Convert the 'comment_date' and 'post_date' to datetime format
     for post in vi_hot_post:
         # if 'comment_date' in post:
