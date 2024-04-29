@@ -35,12 +35,13 @@ if __name__ == '__main__':
     vi_hot_post = scraper.most_discussed_org(subreddit='ValueInvesting', category='hot',limit=10)
     # Convert the 'comment_date' and 'post_date' to datetime format
     for post in vi_hot_post:
-        # if 'comment_date' in post:
-        #     post['comment_date'] = datetime.fromtimestamp(post['comment_date']).isoformat()
+        if 'comments' in post:
+            for comment in post['comments']:
+                comment['comment_date'] = datetime.fromtimestamp(comment['comment_date']).isoformat()
         if 'post_date' in post:
             post['post_date'] = datetime.fromtimestamp(post['post_date']).isoformat()
 
-    # json.dumps(vi_hot_post,indent=4)
+    json.dumps(vi_hot_post,indent=4)
     # Convert the first item in vi_hot_post to a JSON string
     json_string = json.dumps(vi_hot_post, indent=4)
 
