@@ -36,10 +36,11 @@ class RedditFinancialScraper:
         }
 
     def extract_comments_data(self, comments):
+        comments.replace_more(limit=None)
         comment_data = []
-        for comment in comments:
-            if isinstance(comment, praw.models.MoreComments):
-                continue
+        for comment in comments.list():
+            # if isinstance(comment, praw.models.MoreComments):
+            #     continue
             comment_data.append({
                 "comment_date": comment.created_utc,
                 "comment_body": comment.body,
