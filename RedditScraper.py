@@ -17,7 +17,7 @@ class RedditFinancialScraper:
             ticker_data = json.load(file)
         return set([ticker['ticker'] for ticker in ticker_data.values()])
 
-    def get_posts(self, subreddit, category='hot', limit=10):
+    def get_posts(self, subreddit, category='hot', limit):
         return getattr(self.reddit.subreddit(subreddit), category)(limit=limit)
 
     def find_symbols(self, text):
@@ -47,14 +47,14 @@ class RedditFinancialScraper:
             })
         return comment_data
 
-    def most_discussed_org(self, subreddit, category='hot', limit=10):
+    def most_discussed_org(self, subreddit, category='hot', limit=100):
         results = []
         for post in self.get_posts(subreddit, category, limit=limit):
             post_data = self.extract_post_data(post)
             results.append(post_data)
         return results
 
-    def most_discussed_org_from_sticky(self, subreddit, limit=10):
+    def most_discussed_org_from_sticky(self, subreddit, limit=100):
         results = []
         for post in self.get_posts(subreddit, category='hot', limit=limit):
             if post.stickied:
