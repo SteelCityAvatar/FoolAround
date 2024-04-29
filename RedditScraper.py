@@ -49,7 +49,7 @@ class RedditFinancialScraper:
 
     def most_discussed_org(self, subreddit, category='hot', limit=10):
         results = []
-        for post in self.get_posts(subreddit, category, limit):
+        for post in self.get_posts(subreddit, category, limit=limit):
             post_data = self.extract_post_data(post)
             results.append(post_data)
         return results
