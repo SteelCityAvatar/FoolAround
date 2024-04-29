@@ -40,8 +40,9 @@ if __name__ == '__main__':
         if 'post_date' in post:
             post['post_date'] = datetime.fromtimestamp(post['post_date']).isoformat()
 
+    # json.dumps(vi_hot_post,indent=4)
     # Convert the first item in vi_hot_post to a JSON string
-    json_string = json.dumps(vi_hot_post[0], indent=4)
+    json_string = json.dumps(vi_hot_post, indent=4)
 
     # Write the JSON string to a file
     with open('vi_hot_post.json', 'w') as f:
