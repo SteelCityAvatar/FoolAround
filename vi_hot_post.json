@@ -163,6 +163,13 @@
         "comments": []
     },
     {
+        "post_title": "How retail ETF investors screw themselves",
+        "post_date": "2024-04-28T23:46:45",
+        "post_body": "",
+        "relevant_tickers": [],
+        "comments": []
+    },
+    {
         "post_title": "My AI-Powered trading platform combines value investing with algorithmic trading",
         "post_date": "2024-04-28T10:44:00",
         "post_body": "Hello!\n\nMy name is Austin. Since I started my MS in software engineering at Carnegie Mellon, I've been passionate about algorithmic trading. Over the years, [I've worked on (and released) and open-source algorithmic trading platform called NextTrade](https://github.com/austin-starks/NextTrade).\n\nWhen working on NextTrade, I made a few critical mistakes. While I won't go over them in detail, these mistakes range from:\n\n* Making NextTrade too slow \n* Not making it configurable enough \n* Making it far too niche\n\nSince then, I've been developing a new platform called [NexusTrade](https://nexustrade.io/). Unlike NextTrade, NexusTrade is freemium. I've done a lot of work making it suitable for all types of traders and investors. Some specfic features that would interest this group include\n\n* [Algorithmic trading using fundamental data](https://medium.com/p/95b0267a0dba)\n* [AI-Powered Stock Screener](https://nexustrade.io/blog/new-feature-launch--an-ai-feature-that-no-other-investing-platform-has-20240213)\n* [More traditional, UI-Based Simple stock screener](https://nexustrade.io/blog/i-just-created-the-worlds-best-stock-screener-20240404)\n\nThese features make it really easy to find value stocks and apply them to your algorithmic trading strategies.\n\n[I wanted to share my thoughts on making NexusTrade a freemium app.](https://medium.com/p/120ce4c90e3c) I think that by it being free-to-try, it can encourage the skeptics to actually try it out and see their results. However, it's also not cheap to host this platform, and I need to strike a balance between usefulness and cost-effectiveness.\n\n[My full thoughts are here.](https://medium.com/p/120ce4c90e3c) I'm really curious to get some feedback on how algorithmic trading can be applied to value investing, and what particular features are you looking out for in such a platform.",
@@ -197,6 +204,11 @@
             {
                 "comment_date": 1714363422.0,
                 "comment_body": "This probably isn't the sub for bonds. Honestly, HYSA or 10 year T bonds",
+                "relevant_tickers": []
+            },
+            {
+                "comment_date": 1714366044.0,
+                "comment_body": "You shouldn't lol, they not good",
                 "relevant_tickers": []
             }
         ]
@@ -651,6 +663,74 @@
         ]
     },
     {
+        "post_title": "Ternium \u2013 don\u2019t miss this boat",
+        "post_date": "2024-04-27T21:21:15",
+        "post_body": "As a value investor, I have been told not to watch prices daily. But given the general upbeat, you may miss the opportunity if you do not do this. Take Ternium as an example\n\n\n\nTernium and its subsidiaries manufacture, process, and sell various steel products mainly in South America. This is cyclical company that is fundamentally sound. It doubled its revenue over the past 12 years through organic growth and acquisitions. It achieved a growing ROE with corresponding improvements in operating efficiencies. \n\n[https://i.postimg.cc/xCfGy3j6/Ternium.png](https://i.postimg.cc/xCfGy3j6/Ternium.png)\n\nWhen I last valued it a couple of weeks ago, there was a margin of safety. But prices have been trending up with 14% gain since mid Feb 2024. Find out more from page 20 of INVEST.\n\n[https://notice.shareinvestor.com/email/newsletter/invest/pdf/Vol204-Invest-26Apr.pdf](https://notice.shareinvestor.com/email/newsletter/invest/pdf/Vol204-Invest-26Apr.pdf)\n\nMoral of the story? Sometimes if you don\u2019t watch price daily, you may miss the boat.\n\n",
+        "relevant_tickers": [],
+        "comments": [
+            {
+                "comment_date": 1714274123.0,
+                "comment_body": "I took a peek. Interesting. In good years, they are very good, on bad years (cyclical) they aren\u2019t half bad. Their roe oscillates.",
+                "relevant_tickers": []
+            },
+            {
+                "comment_date": 1714316047.0,
+                "comment_body": "Every five years or so you can pick up shares for around $10 each",
+                "relevant_tickers": []
+            },
+            {
+                "comment_date": 1714335832.0,
+                "comment_body": "Click bait title and OP that sounds like it's written by AI. This is makes Wsb TA guys look smart. Here, have a downvote.",
+                "relevant_tickers": [
+                    "OP",
+                    "AI"
+                ]
+            },
+            {
+                "comment_date": 1714333296.0,
+                "comment_body": "Rocca family are excellent business folks.",
+                "relevant_tickers": []
+            },
+            {
+                "comment_date": 1714339005.0,
+                "comment_body": "Are they better performing than Vale ?",
+                "relevant_tickers": []
+            },
+            {
+                "comment_date": 1714302488.0,
+                "comment_body": "The Chinese have dominated in steel production for years and any company that has been able to compete with them for this long is probably lean, mean, and well managed.  I bought a small position earlier this year.",
+                "relevant_tickers": []
+            },
+            {
+                "comment_date": 1714279724.0,
+                "comment_body": "When you don\u2019t mention PE or PB or PS it is obvious you no clue whether this stock is under or overvalued.",
+                "relevant_tickers": [
+                    "PB"
+                ]
+            }
+        ]
+    },
+    {
+        "post_title": "Warren Buffett Bolsters Holdings in Liberty SiriusXM Group",
+        "post_date": "2024-04-27T20:04:42",
+        "post_body": "[https://finance.yahoo.com/news/warren-buffett-bolsters-holdings-liberty-071810995.html](https://finance.yahoo.com/news/warren-buffett-bolsters-holdings-liberty-071810995.html)",
+        "relevant_tickers": [],
+        "comments": [
+            {
+                "comment_date": 1714272154.0,
+                "comment_body": "Could this be a move for the satellite infrastructure rather than what it plays? I have to imagine Sirius' satellite network has capabilities beyond classic vinyl. The moat is the barrier to entry in satellites and the billionaires are all looking skyward. They know where the frontier of untapped value lies.",
+                "relevant_tickers": []
+            },
+            {
+                "comment_date": 1714267347.0,
+                "comment_body": "I don't know if it's a good investment or not, but Sirius is the one subscription I will never cancel. Music is more important than TV to me.",
+                "relevant_tickers": [
+                    "TV"
+                ]
+            }
+        ]
+    },
+    {
         "post_title": "What's your thoughts about Fisker (FSRN)?",
         "post_date": "2024-04-28T17:14:39",
         "post_body": "Fisker has definitely gone through some tough times..  \n\r  \nBut with the latest news regarding potential buyout: [https://www.businessinsider.com/fisker-tells-staff-startup-in-talks-with-4-automakers-buyout-2024-4](https://www.businessinsider.com/fisker-tells-staff-startup-in-talks-with-4-automakers-buyout-2024-4)\r  \n\r  \nand the majority of the customers that seems quite pleased with their vehicle: [https://www.oxoresearch.com/fisker-ocean-market-research-report](https://www.oxoresearch.com/fisker-ocean-market-research-report)\r  \n\r  \nWould now be a good time to place a bet? What do you think?",
@@ -745,74 +825,6 @@
                 "comment_date": 1714361480.0,
                 "comment_body": "Do not post here again.",
                 "relevant_tickers": []
-            }
-        ]
-    },
-    {
-        "post_title": "Ternium \u2013 don\u2019t miss this boat",
-        "post_date": "2024-04-27T21:21:15",
-        "post_body": "As a value investor, I have been told not to watch prices daily. But given the general upbeat, you may miss the opportunity if you do not do this. Take Ternium as an example\n\n\n\nTernium and its subsidiaries manufacture, process, and sell various steel products mainly in South America. This is cyclical company that is fundamentally sound. It doubled its revenue over the past 12 years through organic growth and acquisitions. It achieved a growing ROE with corresponding improvements in operating efficiencies. \n\n[https://i.postimg.cc/xCfGy3j6/Ternium.png](https://i.postimg.cc/xCfGy3j6/Ternium.png)\n\nWhen I last valued it a couple of weeks ago, there was a margin of safety. But prices have been trending up with 14% gain since mid Feb 2024. Find out more from page 20 of INVEST.\n\n[https://notice.shareinvestor.com/email/newsletter/invest/pdf/Vol204-Invest-26Apr.pdf](https://notice.shareinvestor.com/email/newsletter/invest/pdf/Vol204-Invest-26Apr.pdf)\n\nMoral of the story? Sometimes if you don\u2019t watch price daily, you may miss the boat.\n\n",
-        "relevant_tickers": [],
-        "comments": [
-            {
-                "comment_date": 1714274123.0,
-                "comment_body": "I took a peek. Interesting. In good years, they are very good, on bad years (cyclical) they aren\u2019t half bad. Their roe oscillates.",
-                "relevant_tickers": []
-            },
-            {
-                "comment_date": 1714316047.0,
-                "comment_body": "Every five years or so you can pick up shares for around $10 each",
-                "relevant_tickers": []
-            },
-            {
-                "comment_date": 1714335832.0,
-                "comment_body": "Click bait title and OP that sounds like it's written by AI. This is makes Wsb TA guys look smart. Here, have a downvote.",
-                "relevant_tickers": [
-                    "OP",
-                    "AI"
-                ]
-            },
-            {
-                "comment_date": 1714333296.0,
-                "comment_body": "Rocca family are excellent business folks.",
-                "relevant_tickers": []
-            },
-            {
-                "comment_date": 1714339005.0,
-                "comment_body": "Are they better performing than Vale ?",
-                "relevant_tickers": []
-            },
-            {
-                "comment_date": 1714302488.0,
-                "comment_body": "The Chinese have dominated in steel production for years and any company that has been able to compete with them for this long is probably lean, mean, and well managed.  I bought a small position earlier this year.",
-                "relevant_tickers": []
-            },
-            {
-                "comment_date": 1714279724.0,
-                "comment_body": "When you don\u2019t mention PE or PB or PS it is obvious you no clue whether this stock is under or overvalued.",
-                "relevant_tickers": [
-                    "PB"
-                ]
-            }
-        ]
-    },
-    {
-        "post_title": "Warren Buffett Bolsters Holdings in Liberty SiriusXM Group",
-        "post_date": "2024-04-27T20:04:42",
-        "post_body": "[https://finance.yahoo.com/news/warren-buffett-bolsters-holdings-liberty-071810995.html](https://finance.yahoo.com/news/warren-buffett-bolsters-holdings-liberty-071810995.html)",
-        "relevant_tickers": [],
-        "comments": [
-            {
-                "comment_date": 1714272154.0,
-                "comment_body": "Could this be a move for the satellite infrastructure rather than what it plays? I have to imagine Sirius' satellite network has capabilities beyond classic vinyl. The moat is the barrier to entry in satellites and the billionaires are all looking skyward. They know where the frontier of untapped value lies.",
-                "relevant_tickers": []
-            },
-            {
-                "comment_date": 1714267347.0,
-                "comment_body": "I don't know if it's a good investment or not, but Sirius is the one subscription I will never cancel. Music is more important than TV to me.",
-                "relevant_tickers": [
-                    "TV"
-                ]
             }
         ]
     },
@@ -2035,13 +2047,13 @@
         "relevant_tickers": [],
         "comments": [
             {
-                "comment_date": 1714167338.0,
-                "comment_body": "I don\u2019t think you can use the term \u201cdeep value\u201d for a mega cap with a 26 P/E. \ud83d\ude02 this is for like microcap stocks that are beaten into oblivion but have a good balance sheet or some hidden value.",
+                "comment_date": 1714170196.0,
+                "comment_body": "Holy Christ this subreddit wtf HAPPENED",
                 "relevant_tickers": []
             },
             {
-                "comment_date": 1714170196.0,
-                "comment_body": "Holy Christ this subreddit wtf HAPPENED",
+                "comment_date": 1714167338.0,
+                "comment_body": "I don\u2019t think you can use the term \u201cdeep value\u201d for a mega cap with a 26 P/E. \ud83d\ude02 this is for like microcap stocks that are beaten into oblivion but have a good balance sheet or some hidden value.",
                 "relevant_tickers": []
             },
             {
@@ -2148,6 +2160,11 @@
             {
                 "comment_date": 1714338785.0,
                 "comment_body": "I think apple is simply going to test its 200 week SMA.\n\n153 per share ish.\n\nDeep value? meh.\n\nup only after that? yes for awhile.",
+                "relevant_tickers": []
+            },
+            {
+                "comment_date": 1714366369.0,
+                "comment_body": "Sometimes I wish I never discovered this sub. It's either all doomer, tiny oil/pharma, or megacap overvalued stocks. \n\nApple is a bad investment because they have no product to drive growth, a high P/E ratio, and an already extremely high valuation. Stock buybacks don't matter if the free cash flow generated by the company doesn't actually justify the price.",
                 "relevant_tickers": []
             },
             {
@@ -5085,59 +5102,5 @@
             "UK"
         ],
         "comments": []
-    },
-    {
-        "post_title": "A simple valuation on Humana $HUM",
-        "post_date": "2024-04-21T02:07:02",
-        "post_body": "* Humana is having a horrible year because of Normalization. People are now seeking procedures which were postponed during Covid,  and this is now costing this health insurer more than anticipated, the solution is to jack up the premiums next year but they have to contend with low cost competitors as well as health professionals who questions the need for the type of Advantage health plans coverage by Humana.\n* Here are the earnings growth, pre-covid, past, present estimated and long term estimated, the numbers are annualized (CAGR) and smoothened:\n\n|Pre-Covid from 2014-2019|Past 10yrs|Past 5Yrs|Past 3Yrs|This Year (Est)|Next Year (Est)|Long Term (Est)|\n|:-|:-|:-|:-|:-|:-|:-|\n|15.51%|10.84%|5.16%|-2.49%|-21.63%|34.15%|6.71%|\n\n* Management has guided that this year, earnings will be around $16.38, this is quite a drop from 2023 earnings of $20.\n* Let's base the long term earnings growth of HUM at the GDP growth rate  of 3%, instead of the consensus growth of 6.71% above. This worst case scenario puts the value of HUM at ($16.38 / (9% - 3%) ) or $273 a share. The last price of HUM is $328.33. To me, this means that in the  worst case scenario, Humana could fall another 16.8%  to this floor price of $273.\n* Note: i use 9% as the discount for large stable companies. (it is probably lower but i want to be consistent across different companies of similar size).\n* If I want to be slightly less pessimistic, i could use 5% long term earnings growth, this works out to around $400. ( 16.38 / (9% - 5%)). Which is above the last price of HUM.\n* So, it comes down to this: Are you confident that HUM can grow earnings by 5% in the long term? I would say there is a very high chance that the current problems are temporary and the future earnings growth will be higher than 5% in the long term.\n* If you buy at the current price, the potential share price appreciation based on 5% earnings growth is 21%. (ie. $400) . Of course i would buy and hold for the long term.\n\nOh and yes, Humana has been increasing Dividends annually by 12% and together with share buybacks the annual total yield has been around 2 - 4% a year. I would consider it a red flag if they  suspend their dividends.\n\nHumana is reporting earnings on on Wednesday before market opens.\n\n----------------------------------\n\nupdate 23th April:\n\n  \n[https://ca.finance.yahoo.com/news/cigna-humana-merger-deal-math-152301290.html](https://ca.finance.yahoo.com/news/cigna-humana-merger-deal-math-152301290.html)\n\n\u201cThe math now works for a CI+HUM fusion,\u201d Windley wrote, adding that a deal for about $420 per Humana share is possible. Humana\u2019s stock was down 0.9% on Monday to close at roughly $325, while Cigna edged up 0.2% to around $353.\n\nWindley said an acquisition could contribute to Cigna\u2019s growth as long as it doesn\u2019t pay more than $470 per share and Humana reaches earnings of $23 per share in 2027. ",
-        "relevant_tickers": [
-            "HUM",
-            "CI"
-        ],
-        "comments": [
-            {
-                "comment_date": 1713706207.0,
-                "comment_body": "1. Humana\u00a0 is in trouble, Cigna saw it and abandoned purchasing Humana. Better companies are out there like UNH and Cigna\n2. Humana\u00a0YTD is down by  -30%  , not thanks",
-                "relevant_tickers": [
-                    "UNH"
-                ]
-            },
-            {
-                "comment_date": 1713720694.0,
-                "comment_body": "i think the health insurance sector is very interesting. huge moat.\n\nbut best in class is UNH tbh. i bought them 3 weeks ago.",
-                "relevant_tickers": [
-                    "UNH"
-                ]
-            },
-            {
-                "comment_date": 1713725460.0,
-                "comment_body": "I work in Medicare Advantage. IMO Humana isn't just suffering from a return to normal procedure levels. If that was the case why did UNH and ELV not experience the same? \n\nI think increased utilization is a factor but bigger than that is that HUM underpriced their policies. IE they are offering too much benefits on their policies vs the competition. They aggressively repriced plans in 22 and 23.\n\nI also fear they have attracted a generally higher utilization client than their competitors due to certain benefit offerings. \n\nWhile they will be able to address that it'll take till 2025 and 2026. \n\n I do own HUM, UNH, and CVS currently.",
-                "relevant_tickers": [
-                    "CVS",
-                    "IMO",
-                    "UNH",
-                    "IE",
-                    "ELV",
-                    "HUM"
-                ]
-            },
-            {
-                "comment_date": 1713799482.0,
-                "comment_body": "As a Hum employee i can tell you that the company has been positioning itself for an acquisition thats why the decision to exit the employers segment in multiple states and focus on Seniors and Medicaid, along with the cigna acquisition talks. \n\nHum is all about Medicare and Medicaid to get the greater valuation you must compare them with other insurance Medicaid and medicare segments.",
-                "relevant_tickers": []
-            },
-            {
-                "comment_date": 1714219902.0,
-                "comment_body": "At these prices it\u2019s a no brainer. Buy the fear \ud83d\ude80\ud83d\ude80\ud83d\ude80\ud83d\ude80\ud83d\ude80",
-                "relevant_tickers": []
-            },
-            {
-                "comment_date": 1713763394.0,
-                "comment_body": "I still think it's a low risk company, that's got good potential\n\nbut it's skirting close to going blah if anything sours, everything is fine but one thing...\n\nIt's a tortoise not a hare, the momentum is totally dead and it's had a horrific year\n\nProfits and Growth is fine, so it's a definate buy with it being cheap too\n\nBut the sluggishness means it's a 45% buy 55% don't buy\n\nIf you think $325 will get to $625 a year it's not a bad deal, but will it take two years to heal?  \nThen it's $325 to $640\n\nraytoei: Are you confident that HUM can grow earnings by 5% in the long term?\n\n4.9% growth, low risk\n\nMedium Risks  \n- Issuing new debt  \n- Poor stock buyback track record  \n- lousy Forward PE Ratio\n\nshitty momentum\n\notherwise it's a gem, unless you uh, read what's going on with the company lol\n\nbut personally i would wait a while before buying it\n\ncould be 2 weeks, could be six months\n\nit's tanked 19% in three months so, its good to buy it, but it could go lower, or stagnate for months... so 55% of my gut says wait\n\nBuffet might not buy it, but Lynch might",
-                "relevant_tickers": [
-                    "HUM"
-                ]
-            }
-        ]
     }
 ]
