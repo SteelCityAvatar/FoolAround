@@ -41,7 +41,7 @@ class RedditFinancialScraper:
             if isinstance(comment, praw.models.MoreComments):
                 continue
             comment_data.append({
-                "carlos_date": datetime.fromtimestamp(comment.created_utc),
+                "carlos_date": datetime.fromtimestamp(comment.created_utc).isoformat(),
                 "comment_body": comment.body,
                 "relevant_tickers": list(self.find_symbols(comment.body))
             })
