@@ -47,7 +47,7 @@ class RedditFinancialScraper:
             })
         return comment_data
 
-    def most_discussed_org(self, subreddit, category='hot', limit=10):
+    def most_discussed_org(self, subreddit,limit,category='hot'):
         results = []
         for post in self.get_posts(subreddit, category, limit=limit):
             post_data = self.extract_post_data(post)
