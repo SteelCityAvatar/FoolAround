@@ -35,16 +35,31 @@ if __name__ == '__main__':
     vi_hot_post = scraper.most_discussed_org(subreddit='ValueInvesting', category='hot',limit=100)
     # Convert the 'comment_date' and 'post_date' to datetime format
     for post in vi_hot_post:
-        if 'comment_date' in post:
-            post['comment_date'] = datetime.fromtimestamp(post['comment_date']).isoformat()
+        if 'comments' in post:
+            for comment in post['comments']:
+                comment['comment_date'] = datetime.fromtimestamp(comment['comment_date']).isoformat()
         if 'post_date' in post:
             post['post_date'] = datetime.fromtimestamp(post['post_date']).isoformat()
+    
+    try:
+        with open('vi_hot_post.json', 'r') as f:
+            existing_data = json.load(f)
+    except FileNotFoundError:
+        existing_data = []
 
-    # Convert the first item in vi_hot_post to a JSON string
-    json_string = json.dumps(vi_hot_post[0], indent=4)
 
-    # Write the JSON string to a file
+
+    test_jsonstr = json.dumps(vi_hot_post, indent=4)
+    with open('testjson.json', 'w') as f:
+        f.write(test_jsonstr)
+
+    # Update existing data with new data
+    existing_data.extend(vi_hot_post)
+
+    # Convert the updated data to a JSON string
+    json_string = json.dumps(existing_data, indent=4)
+
+    # Write the updated data back to the file
     with open('vi_hot_post.json', 'w') as f:
-        print(json_string)
         f.write(json_string)
 
