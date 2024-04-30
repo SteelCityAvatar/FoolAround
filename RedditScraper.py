@@ -23,7 +23,7 @@ class RedditFinancialScraper:
     def find_symbols(self, text):
         pattern = self.stock_regex
         found_tickers = set(re.findall(pattern, text))
-        valid_tickers = {ticker: (ticker.upper() in self.ticker_list) for ticker in found_tickers}
+        valid_tickers = {ticker: (ticker.upper() in self.ticker_list) if ticker.upper() in self.ticker_list else False for ticker in found_tickers}
         return valid_tickers
 
     def extract_post_data(self, post):
