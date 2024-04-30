@@ -24,7 +24,7 @@ class RedditFinancialScraper:
             ticker_data = json.load(file)
         return set([ticker['ticker'] for ticker in ticker_data.values()])
 
-    def get_posts(self, subreddit, category='hot', limit=10):
+    def get_posts(self, subreddit,limit,category='hot'):
         return getattr(self.reddit.subreddit(subreddit), category)(limit=limit)
 
     def find_symbols(self, text):
