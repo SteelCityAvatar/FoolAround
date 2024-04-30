@@ -608,6 +608,13 @@
                 "relevant_tickers": []
             },
             {
+                "comment_date": "2024-04-29T22:26:43",
+                "comment_body": "Intel developed the technology TSMC and AMD are using to dominate the market, but Intel thought it was too expensive to use and went with the cheaper more affordable option (multi-pattern DUV).  Intel has the first EUV scanner and are developing the processes that will take us sub 1nm.  They are the easiest play if you want to get rich over the next 15 years.",
+                "relevant_tickers": [
+                    "AMD"
+                ]
+            },
+            {
                 "comment_date": "2024-04-29T21:58:32",
                 "comment_body": "They have only been able to beat quarterly estimates due to cost cutting, their revenue numbers have been dwindling, can\u2019t expect Wall Street to be bullish on a shrinking company",
                 "relevant_tickers": []
@@ -1126,6 +1133,11 @@
                 "relevant_tickers": []
             },
             {
+                "comment_date": "2024-04-29T19:24:12",
+                "comment_body": "We Study Billionaires.",
+                "relevant_tickers": []
+            },
+            {
                 "comment_date": "2024-04-29T17:57:30",
                 "comment_body": "The Investors Podcast",
                 "relevant_tickers": []
@@ -1133,11 +1145,6 @@
             {
                 "comment_date": "2024-04-29T18:27:51",
                 "comment_body": "My completely 100% absolutely unbiased opinion..\n\nThe Telltales Podcast  \n[https://telltales.substack.com/](https://telltales.substack.com/)",
-                "relevant_tickers": []
-            },
-            {
-                "comment_date": "2024-04-29T19:24:12",
-                "comment_body": "We Study Billionaires.",
                 "relevant_tickers": []
             }
         ]
@@ -1216,13 +1223,6 @@
         "comments": []
     },
     {
-        "post_title": "Youtube channels or podcasts to follow for US tech stocks",
-        "post_date": "2024-04-29T17:38:55",
-        "post_body": "I am a non-US citizen looking to invest in US tech stocks. Can anyone share any source which will help understand the US tech companies better and which hosts such kind of discussion? Need only Tech stocks.",
-        "relevant_tickers": [],
-        "comments": []
-    },
-    {
         "post_title": "Billionaire Hedge Fund Manager Goes All In on AMZN Stock - Investocracy",
         "post_date": "2024-04-29T07:59:24",
         "post_body": "",
@@ -1255,6 +1255,13 @@
                 "relevant_tickers": []
             }
         ]
+    },
+    {
+        "post_title": "Youtube channels or podcasts to follow for US tech stocks",
+        "post_date": "2024-04-29T17:38:55",
+        "post_body": "I am a non-US citizen looking to invest in US tech stocks. Can anyone share any source which will help understand the US tech companies better and which hosts such kind of discussion? Need only Tech stocks.",
+        "relevant_tickers": [],
+        "comments": []
     },
     {
         "post_title": "Which  corporate bonds should I buy",
