@@ -32,7 +32,7 @@ if __name__ == '__main__':
     
     #ValueInvestingSub
     # Get the most discussed posts
-    vi_hot_post = scraper.most_discussed_org(subreddit='ValueInvesting', category='hot',limit=1000)
+    vi_hot_post = scraper.most_discussed_org(subreddit='ValueInvesting', category='hot',limit=100)
     # Convert the 'comment_date' and 'post_date' to datetime format
     for post in vi_hot_post:
         if 'comments' in post:
@@ -40,11 +40,14 @@ if __name__ == '__main__':
                 comment['comment_date'] = datetime.fromtimestamp(comment['comment_date']).isoformat()
         if 'post_date' in post:
             post['post_date'] = datetime.fromtimestamp(post['post_date']).isoformat()
+    
     try:
         with open('vi_hot_post.json', 'r') as f:
             existing_data = json.load(f)
     except FileNotFoundError:
         existing_data = []
+
+
 
     test_jsonstr = json.dumps(vi_hot_post, indent=4)
     with open('testjson.json', 'w') as f:

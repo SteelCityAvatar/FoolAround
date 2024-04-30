@@ -27,13 +27,14 @@ class RedditFinancialScraper:
         return valid_tickers
 
     def extract_post_data(self, post):
-        return {
+        post_data = {
             "post_title": post.title,
             "post_date": post.created_utc,
             "post_body": post.selftext,
-            "relevant_tickers": list(self.find_symbols(post.title) | self.find_symbols(post.selftext)),
             "comments": self.extract_comments_data(post.comments)
         }
+        post_data['relevant_tickers'] = list(self.find_symbols(post_data['post_body']))
+        return post_data
 
     def extract_comments_data(self, comments):
         comments.replace_more(limit=None)
@@ -41,11 +42,13 @@ class RedditFinancialScraper:
         for comment in comments.list():
             # if isinstance(comment, praw.models.MoreComments):
             #     continue
-            comment_data.append({
+            comment_dict = {
                 "comment_date": comment.created_utc,
                 "comment_body": comment.body,
-                "relevant_tickers": list(self.find_symbols(comment.body))
-            })
+                # "relevant_tickers": list(self.find_symbols(comment.body))
+            }
+            comment_dict['relevant_tickers'] = list(self.find_symbols(comment_dict['comment_body']))
+            comment_data.append(comment_dict)
         return comment_data
 
     def most_discussed_org(self, subreddit,limit=10,category='hot'):
