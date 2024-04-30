@@ -1,10 +1,8 @@
 import re
-dict11 = {
-    "comment_date": "2024-04-28T15:20:28",
-    "comment_body": "Does anyone else think Brk.b is too high to put in money right now? I am wondering if I should wait til it drops more or just say screw it. VOO is too high as well imo. I have been throwing in my money into KO lately though",
-    "relevant_tickers": [
-        "KO"
-    ]
+dict11 =            {
+    "comment_date": "2024-04-29T10:59:03",
+    "comment_body": "There are many answers to that question.  Most are answered based on your overall financial standing in regards to when you want/need to stop working.  For just a get-going portfolio that will help answer retirement questions down the line, I prefer a mix of overall market indexes like VOO (50%), DGRO (10%), SPDW (20%), SPEM (10%), and then the final 10% in a money market to build cash to buy favorite stocks when the market (VOO) drops more than 3% in a day.  Buying on dips with cash is always a good long term feeling.",
+    "relevant_tickers": []
 }
 
 text = dict11['comment_body']
@@ -17,3 +15,8 @@ print(found_tickers)
 
 found_tickers = set(re.findall(patturn, text))
 print(found_tickers)
+
+found_tickers = set(re.findall(pattirn, text))
+print(found_tickers)
+
+
