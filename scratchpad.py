@@ -8,6 +8,12 @@ dict11 = {
 }
 
 text = dict11['comment_body']
-pattern =r'\b[A-Z]{2,5}(?:\.[A-Z]{2,})?\b'
+pattern = r'\b[A-Za-z]{1,5}(?:\.[A-Za-z]+)?\b'
+patturn = r'\b[A-Z]{2,5}(?:\.[A-Za-z]+)?\b'
+pattirn = r'\b[A-Z]{2,5}(?:\.[A-Za-z]+)?\b'
+
 found_tickers = set(re.findall(pattern, text))
-found_tickers
+print(found_tickers)
+
+found_tickers = set(re.findall(patturn, text))
+print(found_tickers)
