@@ -5,28 +5,30 @@ import pandas as pd
 import plotly.express as px
 import ast
 # Read the CSV file
-df = pd.read_csv(r'C:\Users\anura\Documents\PyProjects\FoolAround\OutputFiles\20240324_173418_ValueInvestingTestDf.csv')
 
-# Count the frequency of each ticker
-df['relevant_tickers'] = df['relevant_tickers'].apply(ast.literal_eval)
-flattened_tickers = df['relevant_tickers'].explode()
-print(flattened_tickers)
-ticker_counts = flattened_tickers.value_counts()
+vi_hot_post = pd.read_json('vi_hot_post.json')
+df = pd.DataFrame(vi_hot_post)
+df.columns
+def extract_tickers(comments):
+    tickers = []
+    for comment in comments:
+        tickers.extend(list(comment['relevant_tickers'].keys()))
+    return tickers
 
-# Create a bar chart
-fig = px.bar(ticker_counts, x=ticker_counts.index, y=ticker_counts.values, labels={'x':'Ticker', 'y':'Count'})
+df['relevant_comments'] = df['comments'].apply(extract_tickers)
+df.columns
 
-# Create a Dash app
-app = dash.Dash(__name__)
 
-app.layout = html.Div(children=[
-    html.H1(children='Reddit Ticker Mentions'),
+# Well what i'd like to do is to extract tickers from the comments, and keep the comments in a searchable datastructure that Ic an reference based on the tickers
 
-    dcc.Graph(
-        id='example-graph',
-        figure=fig
-    )
-])
 
-# if __name__ == '__main__':
-app.run_server(debug=True)
+# from collections import defaultdict
+
+# def extract_tickers(comments):
+#     tickers = defaultdict(list)
+#     for comment in comments:
+#         for ticker in comment['relevant_tickers'].keys():
+#             tickers[ticker].append(comment['comment_body'])
+#     return dict(tickers)
+
+# df['relevant_comments'] = df['comments'].apply(extract_tickers)
