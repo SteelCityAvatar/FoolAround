@@ -1,3 +1,6 @@
+'''
+Authors: Anurag Purker, & GPT
+'''
 import praw
 import re
 import pandas as pd
