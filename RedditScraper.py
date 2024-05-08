@@ -24,7 +24,7 @@ class RedditFinancialScraper:
             ticker_data = json.load(file)
         return set([ticker['ticker'] for ticker in ticker_data.values()])
 
-    def get_posts(self, subreddit,limit,category='hot'):
+    def get_posts(self, subreddit,category='hot',limit=10):
         return getattr(self.reddit.subreddit(subreddit), category)(limit=limit)
 
     def find_symbols(self, text):
@@ -74,7 +74,44 @@ class RedditFinancialScraper:
                 break  # Stop after processing the first stickied post
         return results
     
-
+    def match_companies(self, comment_text, ticker_dict):
+        
+        if ticker_dict is None:
+            ticker_dict = self.ticker_list
+        sec_dict = {v: k for k, v in self.ticker_list.items()}
+        
+        relevant_tickers = []
+        for ticker, company_name in sec_dict.items():
+            similarity_score = fuzz.partial_ratio(company_name.lower(), comment_text.lower())
+            print(similarity_score)
+            if similarity_score > 80:
+            relevant_tickers.append(ticker)
+            print(f"Found reference to {ticker} ({company_name}) in the comment.")
+        return relevant_tickers
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        if ticker_dict is None:
+            ticker_dict = self.ticker_list
+        sec_dict = {v: k for k, v in ticker_dict.items()}
+        
+        relevant_companies = []
+        for ticker, company_name in sec_dict.items():
+            similarity_score = fuzz.partial_ratio(company_name.lower(), comment_text.lower())
+            sim = fuzz.ratio(comment_text.lower(), company_name.lower())
+            print(similarity_score)
+            print(sim)
+            if similarity_score > 80:
+                relevant_companies.append(company_name)
+                print(f"Found reference to {ticker} ({company_name}) in the comment.")
+        return relevant_companies
 # class RedditFinancialScraper:
 #     def __init__(self, client_id, client_secret, user_agent, ticker_file):
 #         self.reddit = praw.Reddit(client_id=client_id, client_secret=client_secret, user_agent=user_agent)
