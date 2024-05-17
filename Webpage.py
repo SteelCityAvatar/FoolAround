@@ -3,7 +3,7 @@ import dash_core_components as dcc
 import dash_html_components as html
 import pandas as pd
 import plotly.express as px
-import ast
+# import ast
 # Read the CSV file
 
 vi_hot_post = pd.read_json('vi_hot_post.json')
@@ -17,7 +17,6 @@ def extract_tickers(comments):
 
 df['relevant_comments'] = df['comments'].apply(extract_tickers)
 df.columns
-
 
 # Well what i'd like to do is to extract tickers from the comments, and keep the comments in a searchable datastructure that Ic an reference based on the tickers
 

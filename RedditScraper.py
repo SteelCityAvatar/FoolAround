@@ -1,12 +1,13 @@
 '''
 Authors: Anurag Purker, & GPT
 '''
+
 import praw
 import re
 import pandas as pd
 import openai
 import os
-import json
+import orjson
 from datetime import datetime
 import praw
 import re
@@ -15,6 +16,7 @@ from datetime import datetime
 from fuzzywuzzy import fuzz
 
 class RedditFinancialScraper:
+
     def __init__(self, client_id, client_secret, user_agent, ticker_file):
         self.reddit = praw.Reddit(client_id=client_id, client_secret=client_secret, user_agent=user_agent)
         self.stock_regex = r'\b[A-Z]{2,5}(?:\.[A-Za-z]+)?\b'
@@ -23,7 +25,8 @@ class RedditFinancialScraper:
     def load_ticker_list(self, ticker_file):
         with open(ticker_file, 'r') as file:
             ticker_data = json.load(file)
-        return set([ticker['ticker'] for ticker in ticker_data.values()])
+        ticker_dict = {item["ticker"]: item["title"] for item in ticker_data.values()}
+        return ticker_dict
 
     def get_posts(self, subreddit,category='hot',limit=10):
         return getattr(self.reddit.subreddit(subreddit), category)(limit=limit)
@@ -34,7 +37,7 @@ class RedditFinancialScraper:
         matched_companies = self.match_companies(text)
         for company in matched_companies:
             found_tickers.add(company)
-        valid_tickers = {ticker: (ticker.upper() in self.ticker_list) if ticker.upper() in self.ticker_list else False for ticker in found_tickers}
+        valid_tickers = {ticker: (ticker.upper() in self.ticker_list.keys()) if ticker.upper() in self.ticker_list.keys() else False for ticker in found_tickers}
         return valid_tickers
 
     def extract_post_data(self, post):
@@ -74,19 +77,16 @@ class RedditFinancialScraper:
                 results.append(post_data)
                 break  # Stop after processing the first stickied post
         return results
-    
-    def match_companies(self, comment_text, ticker_dict=None):
-        
-        if ticker_dict is None:
-            ticker_dict = self.ticker_list
-        sec_dict = {v: k for k, v in self.ticker_list.items()}
-        
+
+    def match_companies(self, comment_text):
+        sec_dict = self.ticker_list
         relevant_tickers = []
+        # print(sec_dict.items())
         for ticker, company_name in sec_dict.items():
             similarity_score = fuzz.partial_ratio(company_name.lower(), comment_text.lower())
             if similarity_score > 80:
                 relevant_tickers.append(ticker)
-                print(f"Found reference to {ticker} ({company_name}) in the comment.")
+                # print(f"Found reference to {ticker} ({company_name}) in the comment.")
         return relevant_tickers
 
 # '''

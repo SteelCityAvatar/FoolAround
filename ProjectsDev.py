@@ -2,7 +2,7 @@ import sys
 import os
 import pandas as pd
 import numpy as np
-import json
+import orjson
 import requests
 from RedditScraper import RedditFinancialScraper
 from pyedgar import EDGARIndex, Filing#, Company
@@ -43,13 +43,13 @@ if __name__ == '__main__':
     
     try:
         with open('vi_hot_post.json', 'r') as f:
-            existing_data = json.load(f)
+            existing_data = orjson.load(f)
     except FileNotFoundError:
         existing_data = []
 
 
 
-    test_jsonstr = json.dumps(vi_hot_post, indent=4)
+    test_jsonstr = orjson.dumps(vi_hot_post, indent=4)
     with open('testjson.json', 'w') as f:
         f.write(test_jsonstr)
 
@@ -57,9 +57,9 @@ if __name__ == '__main__':
     existing_data.extend(vi_hot_post)
 
     # Convert the updated data to a JSON string
-    json_string = json.dumps(existing_data, indent=4)
+    json_string = orjson.dumps(existing_data, indent=4)
 
     # Write the updated data back to the file
     with open('vi_hot_post.json', 'w') as f:
-        f.write(json_string)
+         f.write(json_string)
 
