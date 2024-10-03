@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Formula Sheet</title>
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+
+    <!-- MathJax for rendering math formulas -->
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+
+    <style>
+        body {
+            padding: 20px;
+            background-color: #1e1e1e; /* Dark background */
+            color: #e0e0e0; /* Light text */
+        }
+
+        h1 {
+            text-align: center;
+            color: #f8f9fa;
+        }
+
+        h2 {
+            text-align: center;
+            color: #f8f9fa;
+            font-size: 1.5rem; /* Smaller font size for section headings */
+            margin-top: 30px;
+            margin-bottom: 15px;
+        }
+
+        .container {
+            display: flex;
+            justify-content: center;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .list-group {
+            width: 60%;
+            text-align: center; /* Center the text inside the list group */
+        }
+
+        .list-group-item {
+            background-color: #2b2b2b;
+            border-color: #444;
+            color: #e0e0e0;
+            text-align: center; /* Ensure formula text is centered */
+        }
+
+        .list-group-item:hover {
+            background-color: #3a3a3a;
+        }
+
+        .modal-content {
+            background-color: #333;
+            color: #e0e0e0;
+        }
+
+        .modal-header {
+            border-bottom: 1px solid #444;
+        }
+
+        .close {
+            color: #f8f9fa;
+        }
+    </style>
+</head>
+<body>
+    <h1>Interactive Formula Sheet</h1>
+
+    <div class="container">
+        <!-- Section Title for Bernoulli Distribution -->
+        <h2>Bernoulli Distribution</h2>
+        <ul class="list-group formula-list">
+            <li class="list-group-item">
+                <a href="#" onclick="showExplanation('Bernoulli Variance')">\( \text{Var}(X) = p(1 - p) \)</a>
+            </li>
+        </ul>
+
+        <!-- Section Title for Uniform Distribution -->
+        <h2>Uniform Distribution</h2>
+        <ul class="list-group formula-list">
+            <li class="list-group-item">
+                <a href="#" onclick="showExplanation('Uniform Variance')">\( \text{Var}(X) = \frac{n(n + 2)}{12} \)</a>
+            </li>
+            <li class="list-group-item">
+                <a href="#" onclick="showExplanation('General Uniform Variance')">\( \text{Var}(X) = \frac{(b - a)(b - a + 2)}{12} \)</a>
+            </li>
+        </ul>
+
+        <!-- Section Title for Geometric Distribution -->
+        <h2>Geometric Distribution</h2>
+        <ul class="list-group formula-list">
+            <li class="list-group-item">
+                <a href="#" onclick="showExplanation('Geometric Distribution PMF')">\( P(X = k) = (1 - p)^{k-1} p \)</a>
+            </li>
+            <li class="list-group-item">
+                <a href="#" onclick="showExplanation('Memorylessness Property')">\( P(X = k + n \mid X > n) = P(X = k) \)</a>
+            </li>
+            <li class="list-group-item">
+                <a href="#" onclick="showExplanation('Expected Value of Geometric Distribution')">\( E[X] = \frac{1}{p} \)</a>
+            </li>
+            <li class="list-group-item">
+                <a href="#" onclick="showExplanation('Total Expectation Theorem for Geometric Distribution')">\( E[X] = p \cdot 1 + (1 - p) \cdot (E[X - 1] + 1) \)</a>
+            </li>
+        </ul>
+    </div>
+
+    <!-- Modal -->
+    <div class="modal fade" id="formulaModal" tabindex="-1" role="dialog" aria-labelledby="formulaModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="formulaModalLabel">Formula Breakdown</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body" id="explanation-text">
+                    <!-- Explanation will be inserted here -->
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Bootstrap and jQuery Scripts -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+    <script>
+        function showExplanation(formulaName) {
+            fetch('/explanation/' + formulaName)
+                .then(response => response.json())
+                .then(data => {
+                    document.getElementById('explanation-text').innerHTML = data.explanation;
+                    $('#formulaModal').modal('show');  // Show the Bootstrap modal
+
+                    // Re-render MathJax content after the modal is shown
+                    MathJax.typesetPromise([document.getElementById('explanation-text')]).then(() => {
+                        console.log('MathJax rendering complete');
+                    }).catch((err) => console.log(err));
+                });
+        }
+    </script>
+</body>
+</html>
