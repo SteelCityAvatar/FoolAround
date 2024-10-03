@@ -5,9 +5,9 @@ Authors: Anurag Purker, & GPT
 import praw
 import re
 import pandas as pd
-import openai
-import os
-import orjson
+# import openai
+# import os
+# import orjson
 from datetime import datetime
 import praw
 import re
@@ -29,6 +29,7 @@ class RedditFinancialScraper:
         return ticker_dict
 
     def get_posts(self, subreddit,category='hot',limit=10):
+        ### try to write off file before just dumping data
         return getattr(self.reddit.subreddit(subreddit), category)(limit=limit)
     
     def find_symbols(self, text):
@@ -43,7 +44,7 @@ class RedditFinancialScraper:
     def extract_post_data(self, post):
         post_data = {
             "post_title": post.title,
-            "post_date": post.created_utc,
+            "post_date": post.created_utc,  
             "post_body": post.selftext,
             "comments": self.extract_comments_data(post.comments)
         }
@@ -81,10 +82,9 @@ class RedditFinancialScraper:
     def match_companies(self, comment_text):
         sec_dict = self.ticker_list
         relevant_tickers = []
-        # print(sec_dict.items())
         for ticker, company_name in sec_dict.items():
             similarity_score = fuzz.partial_ratio(company_name.lower(), comment_text.lower())
-            if similarity_score > 80:
+            if similarity_score > 70:
                 relevant_tickers.append(ticker)
                 # print(f"Found reference to {ticker} ({company_name}) in the comment.")
         return relevant_tickers
